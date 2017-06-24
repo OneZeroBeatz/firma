@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.poslovna.bezbednost/ws/MT102"
+    xmlns:mt102="http://xml.poslovna.bezbednost/ws/MT102"
+    xmlns:mt103="http://xml.poslovna.bezbednost/ws/MT103"
+    xmlns:nzp="http://xml.poslovna.bezbednost/ws/NalogZaPrenos">
+
+    <xs:import namespace="http://xml.poslovna.bezbednost/ws/MT103" schemaLocation="MT103.xsd"/>
+    <xs:import namespace="http://xml.poslovna.bezbednost/ws/NalogZaPrenos"
+        schemaLocation="NalogZaPrenos.xsd"/>
+    
+    <xs:element name="MT102Request" type="mt102:MT102Request"/>
+    <xs:element name="MT102Response" type="mt102:MT102Response"/>
+
+    <xs:complexType name="MT102Request">
+        <xs:sequence>
+            <xs:element name="IDPoruke" type="nzp:TIDPoruke"/>
+            <xs:element name="BankaDuznika" type="mt103:TSWIFTIRacun"/>
+            <xs:element name="BankaPoverioca" type="mt103:TSWIFTIRacun"/>
+            <xs:element name="UkupanIznos" type="nzp:TIznos"/>
+            <xs:element name="SifraValute" type="nzp:TOznakaValute"/>
+            <xs:element name="DatumValute" type="xs:date" />
+            <xs:element name="Datum" type="xs:date" />
+            <xs:element maxOccurs="unbounded" name="PojedinacnoPlacanje" type="mt102:TPojedinacnoPlacanje"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MT102Response">
+        <xs:sequence>
+            <xs:element name="odgovor" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TPojedinacnoPlacanje">
+        <xs:sequence>
+            <xs:element name="IDNalogaZaPlacanje" type="nzp:TIDPoruke"/>
+            <xs:element name="Duznik" type="nzp:TOpis" />
+            <xs:element name="SvrhaPlacanja" type="nzp:TOpis" />
+            <xs:element name="Primalac" type="nzp:TOpis" />
+            <xs:element name="DatumNaloga" type="xs:date" />
+            <xs:element name="DuznikRacun" type="nzp:TPodaciORacunu" />
+            <xs:element name="PoverilacRacun" type="nzp:TPodaciORacunu" />
+            <xs:element name="Iznos" type="nzp:TIznos" />
+            <xs:element name="SifraValute" type="nzp:TOznakaValute"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

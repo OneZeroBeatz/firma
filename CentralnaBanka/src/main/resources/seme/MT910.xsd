@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.poslovna.bezbednost/ws/MT910"
+    xmlns:mt900="http://xml.poslovna.bezbednost/ws/MT900"
+    xmlns:mt910="http://xml.poslovna.bezbednost/ws/MT910">
+
+    <xs:import namespace="http://xml.poslovna.bezbednost/ws/MT900" schemaLocation="MT900.xsd"/>
+
+    <xs:element name="MT910Request" type="mt900:MT900Request"/>
+    <xs:element name="MT910Response" type="mt900:MT900Response"/>
+</xs:schema>

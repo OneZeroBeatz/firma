@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.poslovna.bezbednost/ws/MT103"
+    xmlns:mt103="http://xml.poslovna.bezbednost/ws/MT103"
+    xmlns:nzp="http://xml.poslovna.bezbednost/ws/NalogZaPrenos">
+    <xs:import namespace="http://xml.poslovna.bezbednost/ws/NalogZaPrenos"
+        schemaLocation="NalogZaPrenos.xsd"/>
+
+    <xs:element name="MT103Request" type="mt103:MT103Request"/>
+    <xs:element name="MT103Response" type="mt103:MT103Response"/>
+
+    <xs:complexType name="MT103Request">
+        <xs:sequence>
+            <xs:element name="IDPoruke" type="nzp:TIDPoruke"/>
+            <xs:element name="BankaDuznika" type="mt103:TSWIFTIRacun"/>
+            <xs:element name="BankaPoverioca" type="mt103:TSWIFTIRacun"/>
+            <xs:element name="Nalog" type="nzp:TNalog"/>
+            <xs:element name="SifraValute" type="nzp:TOznakaValute"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MT103Response">
+        <xs:sequence>
+            <xs:element name="odgovor" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="TSWIFTIRacun">
+        <xs:sequence>
+            <xs:element name="SWIFT" type="mt103:TSWIFT"/>
+            <xs:element name="ObracunskiRacun" type="nzp:TBrojRacuna"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TSWIFT">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z0-9][A-Z0-9]([X][X][X])?"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

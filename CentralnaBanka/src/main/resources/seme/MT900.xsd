@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.poslovna.bezbednost/ws/MT900"
+    xmlns:mt900="http://xml.poslovna.bezbednost/ws/MT900"
+    xmlns:mt103="http://xml.poslovna.bezbednost/ws/MT103"
+    xmlns:nzp="http://xml.poslovna.bezbednost/ws/NalogZaPrenos">
+
+    <xs:import namespace="http://xml.poslovna.bezbednost/ws/NalogZaPrenos"
+        schemaLocation="NalogZaPrenos.xsd"/>
+    <xs:import namespace="http://xml.poslovna.bezbednost/ws/MT103" schemaLocation="MT103.xsd"/>
+
+    <xs:element name="MT900Request" type="mt900:MT900Request"/>
+    <xs:element name="MT900Response" type="mt900:MT900Response"/>
+
+    <xs:complexType name="MT900Request">
+        <xs:sequence>
+            <xs:element name="IDPoruke" type="nzp:TIDPoruke"/>
+            <xs:element name="BankaDuznika" type="mt103:TSWIFTIRacun"/>
+            <xs:element name="IDPorukeNaloga" type="nzp:TIDPoruke"/>
+            <xs:element name="DatumValute" type="xs:date" />
+            <xs:element name="Iznos" type="nzp:TIznos" />
+            <xs:element name="SifraValute" type="nzp:TOznakaValute"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MT900Response">
+        <xs:sequence>
+            <xs:element name="odgovor" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
