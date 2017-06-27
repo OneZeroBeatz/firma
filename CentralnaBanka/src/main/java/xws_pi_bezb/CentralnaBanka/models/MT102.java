@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 @Entity
 @Table(name = "mt102")
@@ -47,8 +46,8 @@ public class MT102 {
 	@Column(name = "datum", nullable = false)
 	protected Date datum;
 
-	@Column(name = "poslat", nullable = false)
-	protected boolean poslat;
+	@Column(name = "obradjen", nullable = false)
+	protected boolean obradjen;
 
 	@OneToMany(mappedBy = "mt102")
 	protected List<PojedinacnoPlacanje> pojedinacnoPlacanje;
@@ -145,12 +144,12 @@ public class MT102 {
 		this.pojedinacnoPlacanje = pojedinacnoPlacanje;
 	}
 
-	public boolean isPoslat() {
-		return poslat;
+	public boolean isObradjen() {
+		return obradjen;
 	}
 
-	public void setPoslat(boolean poslat) {
-		this.poslat = poslat;
+	public void setObradjen(boolean obradjen) {
+		this.obradjen = obradjen;
 	}
 
 }

@@ -10,13 +10,14 @@ import xws_pi_bezb.CentralnaBanka.models.MT102;
 
 @Repository
 @Transactional
-public interface IMT102Repository extends JpaRepository<MT102, Long>{
+public interface IMT102Repository extends JpaRepository<MT102, Long> {
 
 	List<MT102> findAll();
+
 	MT102 findById(Long id);
+
 	MT102 findByIdPoruke(String idPorukeNaloga);
-	MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat);
-	
-	
-	
+
+	List<MT102> findByObradjen(boolean b);
+
 }

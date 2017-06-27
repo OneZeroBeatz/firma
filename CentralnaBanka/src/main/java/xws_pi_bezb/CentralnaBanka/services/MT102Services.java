@@ -41,13 +41,12 @@ public class MT102Services implements IMT102Services {
 
 	@Override
 	public MT102 findByIdPoruke(String idPorukeNaloga) {
-		// TODO Auto-generated method stub
 		return repo.findByIdPoruke(idPorukeNaloga);
 	}
 
 	@Override
-	public MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat) {
-		return repo.findBySwiftDuznikAndSwiftPoverilacAndPoslat(swiftKod, swiftKod2, poslat);
+	public List<MT102> findByObradjen(boolean b) {
+		return repo.findByObradjen(b);
 	}
 
 }

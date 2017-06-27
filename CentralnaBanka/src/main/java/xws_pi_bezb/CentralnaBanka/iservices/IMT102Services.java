@@ -17,6 +17,6 @@ public interface IMT102Services {
 
 	MT102 findByIdPoruke(String idPorukeNaloga);
 
-	MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat);
+	List<MT102> findByObradjen(boolean b);
 
 }
