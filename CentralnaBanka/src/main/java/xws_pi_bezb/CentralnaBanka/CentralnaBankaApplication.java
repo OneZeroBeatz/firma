@@ -3,10 +3,6 @@ package xws_pi_bezb.CentralnaBanka;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import bezbednost.poslovna.xml.ws.mt102.MT102Request;
-import bezbednost.poslovna.xml.ws.mt103.MT103Request;
-import bezbednost.poslovna.xml.ws.mt900.MT900Request;
-
 @SpringBootApplication
 public class CentralnaBankaApplication {
 
