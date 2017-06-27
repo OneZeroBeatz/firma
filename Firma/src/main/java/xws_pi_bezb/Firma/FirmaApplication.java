@@ -8,8 +8,8 @@ public class FirmaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FirmaApplication.class, args);
-		/*FirmaClient fc = new FirmaClient();
-		fc.posaljiNalogZaPrenos();*/
+		FirmaClient fc = new FirmaClient();
+		//fc.posaljiNalogZaPrenos();
 		//fc.posaljiZahtevZaIzvod();
 		/*
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
@@ -19,7 +19,11 @@ public class FirmaApplication {
         //NalogZaPrenosResponse response = firmaClient.posaljiNalogZaPrenos();
         System.out.println("Gledamo: " + response);
         */
-		FirmaRestClient fc = new FirmaRestClient();
-		fc.posaljiFakturu();
+		
+		fc.posaljiZahtevZaIzvod();
+		
+		// REST Service
+		/*FirmaRestClient fc = new FirmaRestClient();
+		fc.posaljiFakturu();*/
 	}
 }

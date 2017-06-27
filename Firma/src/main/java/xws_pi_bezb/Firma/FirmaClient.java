@@ -20,6 +20,7 @@ import org.w3c.dom.Document;
 
 import bezbednost.poslovna.xml.ws.izvod.IzvodRequest;
 import bezbednost.poslovna.xml.ws.izvod.IzvodResponse;
+import bezbednost.poslovna.xml.ws.izvod.TZahtev;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.NalogZaPrenosRequest;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.NalogZaPrenosResponse;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
@@ -211,6 +212,19 @@ public class FirmaClient extends WebServiceGatewaySupport {
 		setUnmarshaller(marshaller);
 
 		IzvodRequest request = new IzvodRequest();
+		
+		TZahtev tZahtev = new TZahtev();
+		tZahtev.setBrojRacuna("111-2223334445556-78");
+		tZahtev.setRedniBrojPreseka(2);
+		
+		try {
+			tZahtev.setDatum(DatatypeFactory.newInstance().newXMLGregorianCalendarDate(2017, 4, 15, 1));
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+		}
+		
+		request.setZahtev(tZahtev);
+		
 		String uri = "http://localhost:9000/ws/Izvod";
 		Object o = getWebServiceTemplate().marshalSendAndReceive(uri, request);
 		IzvodResponse response = (IzvodResponse) o;
