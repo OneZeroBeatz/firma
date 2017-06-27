@@ -1,0 +1,1 @@
+insert into poslovna_banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun, ukupan_novac, link) values ('Banka1', 111, '111', '111', 1000000, 'link1');

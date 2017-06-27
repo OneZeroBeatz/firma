@@ -1,0 +1,1 @@
+var app = angular.module('xws_pi_bezb', ['xws_pi_bezb.kontroleri', 'xws_pi_bezb.servisi', 'xws_pi_bezb.rute']);
