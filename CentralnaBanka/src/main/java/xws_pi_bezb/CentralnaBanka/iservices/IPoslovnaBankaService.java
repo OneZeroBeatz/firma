@@ -9,4 +9,8 @@ public interface IPoslovnaBankaService {
 	List<PoslovnaBanka> findAll();
 	
 	PoslovnaBanka findOne(Long id);
+
+	PoslovnaBanka findBySwiftKod(String swiftDuznik);
+
+	void save(PoslovnaBanka banka);
 }

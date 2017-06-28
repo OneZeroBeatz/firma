@@ -1,1 +1,4 @@
-insert into poslovna_banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun, ukupan_novac, link) values ('Banka1', 111, '111', '111', 1000000, 'link1');
+insert into poslovna_banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun, ukupan_novac, link) values ('Banka1', 111, 'AAAARS11', '111', 10000000, 'http://localhost:9000/');
+insert into poslovna_banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun, ukupan_novac, link) values ('Banka2', 111, 'BBBBRS22', '111', 10000000, 'http://localhost:9090/');
+insert into poslovna_banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun, ukupan_novac, link) values ('Banka3', 111, 'CCCCRS33', '111', 30000000, 'http://localhost:9990/');
+insert into poslovna_banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun, ukupan_novac, link) values ('Banka4', 111, 'DDDDRS44', '111', 20000000, 'http://localhost:9999/');

@@ -25,4 +25,14 @@ public class PoslovnaBankaService implements IPoslovnaBankaService{
 		return bankaRepository.findById(id);
 	}
 
+	@Override
+	public PoslovnaBanka findBySwiftKod(String swiftDuznik) {
+		return bankaRepository.findBySwiftKod(swiftDuznik);
+	}
+
+	@Override
+	public void save(PoslovnaBanka banka) {
+		bankaRepository.save(banka);
+	}
+
 }

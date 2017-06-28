@@ -1,7 +1,5 @@
 package xws_pi_bezb.CentralnaBanka;
 
-import java.util.List;
-
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
@@ -11,7 +9,6 @@ import bezbednost.poslovna.xml.ws.mt103.MT103Request;
 import bezbednost.poslovna.xml.ws.mt103.MT103Response;
 import bezbednost.poslovna.xml.ws.mt900.MT900Request;
 import bezbednost.poslovna.xml.ws.mt900.MT900Response;
-import xws_pi_bezb.CentralnaBanka.models.MT102;
 
 public class CentralnaBankaKlijent extends WebServiceGatewaySupport {
 
