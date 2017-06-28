@@ -1,12 +1,8 @@
 package xws_pi_bezb.CentralnaBanka.webservis;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -39,7 +35,7 @@ public class CentralnaBankaEndpoint {
 
 	@Autowired
 	private IPojedinacnoPlacanjeService pojedinacnoPlacanjeServis;
-	
+
 	@Autowired
 	private IPoslovnaBankaService poslovnaBankaService;
 
@@ -54,8 +50,8 @@ public class CentralnaBankaEndpoint {
 		MT102Response response = new MT102Response();
 
 		MT102 mt102 = konvertujMt102Request(request);
-		mt102Servis.save(mt102);
-
+		
+		// toString od mt102 vratiti
 		response.setOdgovor("MT102 - sve ok");
 		return response;
 	}
@@ -65,10 +61,10 @@ public class CentralnaBankaEndpoint {
 	public MT103Response mt103(@RequestPayload MT103Request request) {
 		MT103Response response = new MT103Response();
 		CentralnaBankaKlijent klijent = new CentralnaBankaKlijent();
-		
+
 		PoslovnaBanka bankaDuznika = poslovnaBankaService.findBySwiftKod(request.getBankaDuznika().getSWIFT());
 		PoslovnaBanka bankaPoverioca = poslovnaBankaService.findBySwiftKod(request.getBankaPoverioca().getSWIFT());
-		
+
 		bankaDuznika.setUkupanNovac(bankaDuznika.getUkupanNovac() - request.getNalog().getIznos().doubleValue());
 		poslovnaBankaService.save(bankaDuznika);
 		bankaPoverioca.setUkupanNovac(bankaPoverioca.getUkupanNovac() + request.getNalog().getIznos().doubleValue());
@@ -111,15 +107,18 @@ public class CentralnaBankaEndpoint {
 		mt102.setObracunskiRacunDuznik(request.getBankaDuznika().getObracunskiRacun());
 		mt102.setObracunskiRacunPoverilac(request.getBankaPoverioca().getObracunskiRacun());
 		mt102.setObradjen(false);
-
-		List<PojedinacnoPlacanje> pojedinacnoPlacanje = new ArrayList<PojedinacnoPlacanje>();
-
+		mt102.setSifraValute(request.getSifraValute());
+		mt102.setSwiftDuznik(request.getBankaDuznika().getSWIFT());
+		mt102.setSwiftPoverilac(request.getBankaPoverioca().getSWIFT());
+		mt102.setUkupanIznos(new BigDecimal(request.getUkupanIznos().doubleValue()));
+		mt102Servis.save(mt102);
+		
 		for (TPojedinacnoPlacanje pojPlacanje : request.getPojedinacnoPlacanje()) {
 			PojedinacnoPlacanje pp = new PojedinacnoPlacanje();
 			pp.setDatumNaloga(pojPlacanje.getDatumNaloga().toGregorianCalendar().getTime());
 			pp.setDuznik(pojPlacanje.getDuznik());
 			pp.setIdNalogaZaPlacanje(pojPlacanje.getIDNalogaZaPlacanje());
-			pp.setIznos(pojPlacanje.getIznos());
+			pp.setIznos(new BigDecimal(pojPlacanje.getIznos().doubleValue()));
 			pp.setModelDuznik(pojPlacanje.getDuznikRacun().getModel());
 			pp.setModelPoverilac(pojPlacanje.getPoverilacRacun().getModel());
 			pp.setPozivNaBrojDuznik(pojPlacanje.getDuznikRacun().getPozivNaBroj());
@@ -129,16 +128,11 @@ public class CentralnaBankaEndpoint {
 			pp.setRacunPoverilac(pojPlacanje.getPoverilacRacun().getRacun());
 			pp.setSifraValute(pojPlacanje.getSifraValute());
 			pp.setSvrhaPlacanja(pojPlacanje.getSvrhaPlacanja());
-
+			pp.setMt102(mt102);
 			pojedinacnoPlacanjeServis.save(pp);
-			pojedinacnoPlacanje.add(pp);
+
 		}
 
-		mt102.setPojedinacnoPlacanje(pojedinacnoPlacanje);
-		mt102.setSifraValute(request.getSifraValute());
-		mt102.setSwiftDuznik(request.getBankaDuznika().getSWIFT());
-		mt102.setSwiftPoverilac(request.getBankaPoverioca().getSWIFT());
-		mt102.setUkupanIznos(request.getUkupanIznos());
 		return mt102;
 	}
 

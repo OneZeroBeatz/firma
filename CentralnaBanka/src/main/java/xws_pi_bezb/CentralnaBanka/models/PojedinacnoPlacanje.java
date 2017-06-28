@@ -177,4 +177,11 @@ public class PojedinacnoPlacanje {
 		this.sifraValute = sifraValute;
 	}
 
+	public MT102 getMt102() {
+		return mt102;
+	}
+	
+	public void setMt102(MT102 mt102) {
+		this.mt102 = mt102;
+	}
 }

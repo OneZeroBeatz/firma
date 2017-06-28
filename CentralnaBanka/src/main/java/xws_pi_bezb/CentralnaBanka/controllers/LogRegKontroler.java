@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import bezbednost.poslovna.xml.ws.mt102.MT102Request;
+import bezbednost.poslovna.xml.ws.mt102.TPojedinacnoPlacanje;
+import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
 import bezbednost.poslovna.xml.ws.mt900.MT900Request;
+import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
 import xws_pi_bezb.CentralnaBanka.CentralnaBankaKlijent;
 import xws_pi_bezb.CentralnaBanka.iservices.IMT102Services;
 import xws_pi_bezb.CentralnaBanka.iservices.IPoslovnaBankaService;
@@ -56,7 +59,6 @@ public class LogRegKontroler {
 			bankaPoverioca.setUkupanNovac(bankaPoverioca.getUkupanNovac() + mt102.getUkupanIznos().doubleValue());
 			poslovnaBankaService.save(bankaPoverioca);
 			
-			
 			mt102.setObradjen(true);
 			mt102Servis.save(mt102);
 
@@ -90,13 +92,17 @@ public class LogRegKontroler {
 		MT102Request req = new MT102Request();
 
 		req.setIDPoruke(mt102.getIdPoruke());
+		
+		TSWIFTIRacun sw = new TSWIFTIRacun();
+		sw.setSWIFT(mt102.getSwiftDuznik());
+		sw.setObracunskiRacun(mt102.getObracunskiRacunDuznik());
+		req.setBankaDuznika(sw);
 
-		req.getBankaDuznika().setSWIFT(mt102.getSwiftDuznik());
-		req.getBankaDuznika().setObracunskiRacun(mt102.getObracunskiRacunDuznik());
-
-		req.getBankaPoverioca().setSWIFT(mt102.getSwiftPoverilac());
-		req.getBankaPoverioca().setObracunskiRacun(mt102.getObracunskiRacunPoverilac());
-
+		TSWIFTIRacun sw1 = new TSWIFTIRacun();
+		sw1.setSWIFT(mt102.getSwiftPoverilac());
+		sw1.setObracunskiRacun(mt102.getObracunskiRacunPoverilac());
+		req.setBankaPoverioca(sw1);
+		
 		req.setUkupanIznos(mt102.getUkupanIznos());
 		req.setSifraValute(mt102.getSifraValute());
 
@@ -122,38 +128,40 @@ public class LogRegKontroler {
 		}
 
 		for (int i = 0; i < mt102.getPojedinacnoPlacanje().size(); i++) {
-			req.getPojedinacnoPlacanje().get(i)
-					.setIDNalogaZaPlacanje(mt102.getPojedinacnoPlacanje().get(i).getIdNalogaZaPlacanje());
+			TPojedinacnoPlacanje pojed = new TPojedinacnoPlacanje();
+			
+			pojed.setIDNalogaZaPlacanje(mt102.getPojedinacnoPlacanje().get(i).getIdNalogaZaPlacanje());
 
-			req.getPojedinacnoPlacanje().get(i).setDuznik(mt102.getPojedinacnoPlacanje().get(i).getDuznik());
-
-			req.getPojedinacnoPlacanje().get(i)
-					.setSvrhaPlacanja(mt102.getPojedinacnoPlacanje().get(i).getSvrhaPlacanja());
+			pojed.setDuznik(mt102.getPojedinacnoPlacanje().get(i).getDuznik());
+			pojed.setSvrhaPlacanja(mt102.getPojedinacnoPlacanje().get(i).getSvrhaPlacanja());
+			pojed.setPrimalac(mt102.getPojedinacnoPlacanje().get(i).getPrimalac());
 
 			gcal = (GregorianCalendar) GregorianCalendar.getInstance();
 			gcal.setTime(mt102.getPojedinacnoPlacanje().get(i).getDatumNaloga());
 
 			try {
 				xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
-				req.getPojedinacnoPlacanje().get(i).setDatumNaloga(xgcal);
+				pojed.setDatumNaloga(xgcal);
 			} catch (DatatypeConfigurationException e) {
 				e.printStackTrace();
 			}
-
-			req.getPojedinacnoPlacanje().get(i).getDuznikRacun()
-					.setPozivNaBroj(mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojDuznik());
-			req.getPojedinacnoPlacanje().get(i).getDuznikRacun()
-					.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
-			req.getPojedinacnoPlacanje().get(i).getDuznikRacun()
-					.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunDruznik());
-
-			req.getPojedinacnoPlacanje().get(i).getPoverilacRacun()
-					.setPozivNaBroj(mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojPoverilac());
-			req.getPojedinacnoPlacanje().get(i).getPoverilacRacun()
-					.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
-			req.getPojedinacnoPlacanje().get(i).getPoverilacRacun()
-					.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunPoverilac());
-
+			
+			TPodaciORacunu rac = new TPodaciORacunu();
+			rac.setPozivNaBroj(mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojDuznik());
+			rac.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
+			rac.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunDruznik());
+			pojed.setDuznikRacun(rac);
+			
+			TPodaciORacunu rac1 = new TPodaciORacunu();
+			rac1.setPozivNaBroj(mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojPoverilac());
+			rac1.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelPoverilac());
+			rac1.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunPoverilac());
+			pojed.setPoverilacRacun(rac1);
+			
+			pojed.setIznos(mt102.getPojedinacnoPlacanje().get(i).getIznos());
+			pojed.setSifraValute(mt102.getPojedinacnoPlacanje().get(i).getSifraValute());
+			
+			req.getPojedinacnoPlacanje().add(pojed);
 		}
 
 		return req;
