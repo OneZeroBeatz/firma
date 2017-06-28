@@ -9,6 +9,8 @@
 package bezbednost.poslovna.xml.ws.faktura;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -153,5 +155,11 @@ public class PodaciOUplati {
     public void setDatumValute(XMLGregorianCalendar value) {
         this.datumValute = value;
     }
+    
+    @Override
+	public String toString() {
+		return "PodaciOUplati [oznakaValute=" + oznakaValute + ", iznosZaUplatu=" + new DecimalFormat("#0.##").format(iznosZaUplatu) + ", uplataNaRacun="
+				+ uplataNaRacun + ", datumValute=" + datumValute.toString() + "]";
+	}
 
 }

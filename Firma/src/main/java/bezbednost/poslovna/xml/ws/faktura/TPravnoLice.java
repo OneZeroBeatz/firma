@@ -125,5 +125,11 @@ public class TPravnoLice {
     public void setPIB(String value) {
         this.pib = value;
     }
+    
+    @Override
+	public String toString() {
+		return "TPravnoLice [naziv=" + naziv + ", adresa=" + adresa + ", pib=" + pib + "]";
+	}
+
 
 }

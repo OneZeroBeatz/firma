@@ -90,5 +90,10 @@ public class PodaciOKupcu
     public void setDatumRacuna(XMLGregorianCalendar value) {
         this.datumRacuna = value;
     }
+    
+    @Override
+	public String toString() {
+		return "PodaciOKupcu [brojRacuna=" + Integer.toString(brojRacuna) + ", datumRacuna=" + datumRacuna.toString() + "]";
+	}
 
 }

@@ -9,6 +9,8 @@
 package bezbednost.poslovna.xml.ws.izvod;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -226,5 +228,14 @@ public class TZaglavljePreseka {
     public void setNovoStanje(BigDecimal value) {
         this.novoStanje = value;
     }
+
+	@Override
+	public String toString() {
+		return "TZaglavljePreseka [zahtev=" + zahtev.toString() + ",\n prethodnoStanje=" + prethodnoStanje + ",\n brojPromenaUKorist="
+				+ Integer.toString(brojPromenaUKorist) + ",\n ukupnoUKorist=" + new DecimalFormat("#0.##").format(ukupnoUKorist) + ",\n brojPromenaNaTeret=" + new DecimalFormat("#0.##").format(brojPromenaNaTeret)
+				+ ",\n ukupnoNaTeret=" + new DecimalFormat("#0.##").format(ukupnoNaTeret)  + ",\n novoStanje=" + new DecimalFormat("#0.##").format(novoStanje) + "]";
+	}
+    
+    
 
 }

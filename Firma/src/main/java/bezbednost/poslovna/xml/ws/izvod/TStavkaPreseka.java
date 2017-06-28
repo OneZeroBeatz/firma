@@ -95,4 +95,11 @@ public class TStavkaPreseka {
         this.smer = value;
     }
 
+	@Override
+	public String toString() {
+		return "TStavkaPreseka [nalog=" + nalog.toString() + ",\n smer=" + smer + "]";
+	}
+    
+    
+
 }

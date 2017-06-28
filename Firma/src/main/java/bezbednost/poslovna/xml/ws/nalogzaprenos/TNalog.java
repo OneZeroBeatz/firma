@@ -9,6 +9,8 @@
 package bezbednost.poslovna.xml.ws.nalogzaprenos;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -266,5 +268,14 @@ public class TNalog {
     public void setIznos(BigDecimal value) {
         this.iznos = value;
     }
+
+	@Override
+	public String toString() {
+		return "TNalog [duznik=" + duznik + ", svrhaPlacanja=" + svrhaPlacanja + ", primalac=" + primalac
+				+ ", datumNaloga=" + datumNaloga.toString() + ", datumValute=" + datumValute.toString() + ", duznikRacun=" + duznikRacun.toString()
+				+ ", poverilacRacun=" + poverilacRacun.toString() + ", iznos=" + new DecimalFormat("#0.##").format(iznos) + "]";
+	}
+    
+    
 
 }

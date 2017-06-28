@@ -100,5 +100,14 @@ public class FakturaRequest {
         }
         return this.stavka;
     }
+    
+    @Override
+	public String toString() {
+		String stavke = "";
+		for(Stavka stavka: stavka){
+			stavke += stavka.toString() + "\n\n";
+		}
+		return "FakturaRequest:\n" + zaglavlje.toString() + "\n, stavka=" + stavke + "]";
+	}
 
 }

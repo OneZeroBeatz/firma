@@ -177,5 +177,15 @@ public class Zaglavlje {
     public void setPodaciOUplati(PodaciOUplati value) {
         this.podaciOUplati = value;
     }
+    
+    @Override
+	public String toString() {
+		return "Zaglavlje:\n "
+				+ "[idPoruke=" + idPoruke + "]\n"
+				+ "[podaciODobavljacu=" + podaciODobavljacu.toString() + "]\n"
+			    + "[podaciOKupcu=" + podaciOKupcu.toString() + "]\n"
+			    + "[podaciRobaIUsluga=" + podaciRobaIUsluga.toString() + "]\n"
+			    + "[podaciOUplati=" + podaciOUplati.toString() + "]\n";
+	}
 
 }

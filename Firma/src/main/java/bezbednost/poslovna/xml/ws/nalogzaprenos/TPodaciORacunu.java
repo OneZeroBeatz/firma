@@ -114,4 +114,11 @@ public class TPodaciORacunu {
         this.pozivNaBroj = value;
     }
 
+	@Override
+	public String toString() {
+		return "TPodaciORacunu [racun=" + racun + ", model=" + Integer.toString(model) + ", pozivNaBroj=" + pozivNaBroj + "]";
+	}
+    
+    
+
 }

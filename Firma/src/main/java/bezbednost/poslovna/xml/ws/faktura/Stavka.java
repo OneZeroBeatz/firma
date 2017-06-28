@@ -9,6 +9,8 @@
 package bezbednost.poslovna.xml.ws.faktura;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -310,5 +312,14 @@ public class Stavka {
     public void setUkupanPorez(BigDecimal value) {
         this.ukupanPorez = value;
     }
+    
+    @Override
+	public String toString() {
+		return "Stavka [redniBroj=" + Integer.toString(redniBroj)  + ", \nnazivRobeIliUsluge=" + nazivRobeIliUsluge + ", \nkolicina="
+				+ new DecimalFormat("#0.##").format(kolicina)  + ", "
+				+ "\njedinicaMere=" + jedinicaMere + ", \njedinicnaCena=" + new DecimalFormat("#0.##").format(jedinicnaCena) + ", \nvrednost="
+				+ vrednost + ", \nprocenatRabata=" + procenatRabata + ", \niznosRabata=" + iznosRabata
+				+ ", \numanjenoZaRabat=" + new DecimalFormat("#0.##").format(umanjenoZaRabat) + ", \nukupanPorez=" + new DecimalFormat("#0.##").format(ukupanPorez) + "]\n\n";
+	}
 
 }

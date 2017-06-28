@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import bezbednost.poslovna.xml.ws.faktura.Stavka;
+
 
 /**
  * <p>Java class for IzvodResponse complex type.
@@ -102,5 +104,17 @@ public class IzvodResponse {
         }
         return this.stavkaPreseka;
     }
+
+	@Override
+	public String toString() {
+		String stavke = "";
+		for(TStavkaPreseka stavka: stavkaPreseka){
+			stavke += stavka.toString() + "\n\n";
+		}
+		
+		return "IzvodResponse [zaglavljePreseka=" + zaglavljePreseka.toString() + ",\n\n Stavke:\n\n=" + stavke + "\n]";
+	}
+    
+    
 
 }

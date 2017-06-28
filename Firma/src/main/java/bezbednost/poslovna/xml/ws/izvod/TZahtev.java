@@ -117,4 +117,12 @@ public class TZahtev {
         this.redniBrojPreseka = value;
     }
 
+	@Override
+	public String toString() {
+		return "TZahtev [brojRacuna=" + brojRacuna + ", datum=" + datum.toString() + ", redniBrojPreseka=" + Integer.toString(redniBrojPreseka)
+				+ "]";
+	}
+    
+    
+
 }

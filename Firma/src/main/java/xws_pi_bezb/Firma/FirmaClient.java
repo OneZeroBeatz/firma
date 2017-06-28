@@ -215,7 +215,7 @@ public class FirmaClient extends WebServiceGatewaySupport {
 		
 		TZahtev tZahtev = new TZahtev();
 		tZahtev.setBrojRacuna("111-2223334445556-78");
-		tZahtev.setRedniBrojPreseka(2);
+		tZahtev.setRedniBrojPreseka(1);
 		
 		try {
 			tZahtev.setDatum(DatatypeFactory.newInstance().newXMLGregorianCalendarDate(2017, 4, 15, 1));
@@ -227,8 +227,18 @@ public class FirmaClient extends WebServiceGatewaySupport {
 		
 		String uri = "http://localhost:9000/ws/Izvod";
 		Object o = getWebServiceTemplate().marshalSendAndReceive(uri, request);
-		IzvodResponse response = (IzvodResponse) o;
-		System.out.println("primljen izvod");
+		
+		if(o != null){
+			IzvodResponse response = (IzvodResponse) o;
+			
+			System.out.println("primljen izvod");
+			
+			System.out.println("********************");
+			System.out.println(response.toString());
+			System.out.println("********************\n");			
+		}else{
+			System.out.println("Ne postoji dnevno stanje za ovaj datum.");
+		}
 
 	}
 
