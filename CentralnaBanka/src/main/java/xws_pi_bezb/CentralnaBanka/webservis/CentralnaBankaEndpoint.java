@@ -1,8 +1,6 @@
 package xws_pi_bezb.CentralnaBanka.webservis;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -48,6 +46,9 @@ public class CentralnaBankaEndpoint {
 	@ResponsePayload
 	public MT102Response mt102(@RequestPayload MT102Request request) {
 		MT102Response response = new MT102Response();
+		
+		System.out.println("*** Stigao je MT102 u CB");
+		System.out.println(request.toString());
 
 		MT102 mt102 = konvertujMt102Request(request);
 		
@@ -60,6 +61,10 @@ public class CentralnaBankaEndpoint {
 	@ResponsePayload
 	public MT103Response mt103(@RequestPayload MT103Request request) {
 		MT103Response response = new MT103Response();
+		
+		System.out.println("*** Stigao je MT103 u CB");
+		System.out.println(request.toString());
+		
 		CentralnaBankaKlijent klijent = new CentralnaBankaKlijent();
 
 		PoslovnaBanka bankaDuznika = poslovnaBankaService.findBySwiftKod(request.getBankaDuznika().getSWIFT());
